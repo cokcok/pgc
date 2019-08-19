@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>ยีนยันข้อมูล</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <table width="50%" class="table_confirm">
+    <tr>
+      <td class="col_head">เลขประจำตัวประชาชน </td>
+      <td class="col_det">{{idcard}}</td>
+    </tr>
+    <tr>
+      <td class="col_head">ชื่อ-นามสกุล </td>
+      <td class="col_det">{{name}}</td>
+    </tr>
+    <tr>
+      <td class="col_head">เบอร์ติดต่อ </td>
+      <td class="col_det">{{tel}}</td>
+    </tr>
+    <tr>
+      <td class="col_head">เนื้อที่ที่มีสิทธิ์ซื้อสารเคมี 3 ชนิด </td>
+      <td class="col_det">{{total_area}}</td>
+    </tr>
+    <tr>
+      <td class="col_head">ประเภทการอบรม </td>
+      <td class="col_det">{{type_training}}</td>
+    </tr>
+    <tr>
+      <td class="col_head">สถานที่อบรม/สอบ </td>
+      <td class="col_det">{{quiz_place}} </td>
+    </tr>
+    <tr>
+      <td class="col_head">สถานะการสอบ</td>
+      <td class="col_det">{{result}} </td>
+    </tr>
+    <tr *ngIf="amount_quota > 0">
+      <td class="col_head">ปริมาณที่มีสิทธิ์ซื้อสาร (ลิตร)</td>
+      <td class="col_det">{{amount_quota/1000}} </td>
+    </tr>
+  </table>
+  <p></p>
+  <div class="div_ps">
+    <p>1.ให้ท่านไปยังสถานที่ที่อบรมและหรือสอบ ตามที่กำหนด มิเช่นนั้นจะถือว่าสละสิทธิ์ในรอบนั้น</p>
+    <p>2.ในกรณีจะแก้ไขข้อมูล ให้ทำการตรวจสิทธิ์ใหม่แล้วทำการยกเลิกข้อมูล แล้วทำการตรวจสอบสิทธิ์ใหม่อีกครั้ง</p>
+    <p>3.เนื้อที่ในการซื้อสารเคมี อาจมีการปรับเปลี่ยนได้</p>
+  </div>
+
+
+
+  <div *ngIf="hideMe">
+    <ion-item>
+      <ion-label>ยอมรับและรับทราบเงื่อนไข</ion-label>
+      <ion-checkbox [(ngModel)]="VCfrule" name="VCfrule" (ionChange)="Cfrule(this)"></ion-checkbox>
+    </ion-item>
+    <button ion-button color="light" round navPop>ย้อนกลับ</button>
+    <button ion-button color="light" round [disabled]="!isenabled" (click)="save()">ยีนยันข้อมูล</button>
+  </div>
+  <div *ngIf="hideMe1">
+    <button ion-button color="light" round navPop>ย้อนกลับ</button>
+    <button ion-button color="light" round (click)="cancel()">ยกเลิกการสมัคร</button>
+  </div>
+  <div *ngIf="hideMe2">
+    <button ion-button color="light" round navPop>ย้อนกลับ</button>
+  </div>
+  <div *ngIf="hideMe3">
+    <ion-item>
+      <ion-label>ยอมรับและรับทราบเงื่อนไข</ion-label>
+      <ion-checkbox [(ngModel)]="VCfrule" name="VCfrule" (ionChange)="Cfrule(this)"></ion-checkbox>
+    </ion-item>
+    <button ion-button color="light" round navPop>ย้อนกลับ</button>
+    <button ion-button color="light" round [disabled]="!isenabled" (click)="save()">ยีนยันข้อมูล</button>
+  </div>
+</ion-content>
