@@ -124,7 +124,7 @@ export class LoginPage {
       (datachkidcard) => {
           if (datachkidcard.exam_status === 0 && datachkidcard.register_status === 0  )
           {
-            console.log('a');
+            //console.log('a');
             this.login.login(myForm.idcard,myForm.type_person).subscribe( //เคสครั้งแรกปกติ
               (data) => {
                 //this.navCtrl.setRoot(HomepagePage);
@@ -195,7 +195,7 @@ export class LoginPage {
                   this.hideMe1 = false;
                   this.hideMe2 = false;
                   this.hideMe4 = false;
-                  let alert = this.config.ChkformAlert('ไม่พบข้อมูลขึ้นทะเบียนเกษตรกร กยท.');
+                  let alert = this.config.ChkformAlert('ไม่พบข้อมูลขึ้นทะเบียนเกษตรกร กยท. ที่เป็น เจ้าของ ผู้เช่า หรือผู้ทำ');
                   alert.present();
                 }
               }
@@ -274,7 +274,7 @@ export class LoginPage {
                         this.hideMe2 = false;
                         this.hideMe4 = false;
                         this.hideMe5 = false;
-                        let alert = this.config.ChkformAlert('ไม่พบข้อมูลขึ้นทะเบียนเกษตรกร กยท.');
+                        let alert = this.config.ChkformAlert('ไม่พบข้อมูลขึ้นทะเบียนเกษตรกร กยท. ที่เป็น เจ้าของ ผู้เช่า หรือผู้ทำ');
                         alert.present();
                       }
                     }
@@ -369,7 +369,7 @@ export class LoginPage {
               this.hideMe1 = false;
               this.hideMe2 = false;
               this.hideMe4 = false;
-              let alert = this.config.ChkformAlert('ไม่พบข้อมูลขึ้นทะเบียนเกษตรกร กยท.');
+              let alert = this.config.ChkformAlert('ไม่พบข้อมูลขึ้นทะเบียนเกษตรกร กยท. ที่เป็น เจ้าของ ผู้เช่า หรือผู้ทำ');
               alert.present();
             }
           }
