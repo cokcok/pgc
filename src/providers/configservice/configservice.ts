@@ -9,6 +9,8 @@ export class ConfigserviceProvider {
   public ip_doc: string = "http://www.rubber.co.th/pgc/doc/";
   public ip_doaechkidcard: string = "https://chem.doae.go.th/api/farmer/rubber";
   public ip_doa: string = "http://203.154.28.235/doa_exam/farmer";
+  public ip_doa1: string = "http://203.154.28.236/doa_exam/farmer";
+  public ip_doa2: string = "http://203.154.28.237/doa_exam/farmer";
   ///203.154.28.235,103.208.27.224
   constructor(public http: HttpClient,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
 

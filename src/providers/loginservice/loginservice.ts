@@ -26,7 +26,7 @@ export class LoginserviceProvider {
     };
     return this.http.post<datachkiddoae>(this.apiUrlchkdoae_idc,data,{headers:header});
   }
- 
+
   loginchkidcarddoa(username:string): Observable<datachkiddoa> {
     const header = { 'Content-Type': 'application/json' };
      let data = {
@@ -35,6 +35,23 @@ export class LoginserviceProvider {
     return this.http.post<datachkiddoa>(this.apiUrlchkdoa_idc,data,{headers:header});
   }
 
+  loginchkidcarddoa1(username:string): Observable<datachkiddoa> {
+    let  apiUrlchkdoa_idc:string = this.c_config.ip_doa1 +"/api_history_rubber.php";
+    const header = { 'Content-Type': 'application/json' };
+     let data = {
+       'idcard':username
+    };
+    return this.http.post<datachkiddoa>(apiUrlchkdoa_idc,data,{headers:header});
+  }
+
+  loginchkidcarddoa2(username:string): Observable<datachkiddoa> {
+    let  apiUrlchkdoa_idc:string = this.c_config.ip_doa2 +"/api_history_rubber.php";
+    const header = { 'Content-Type': 'application/json' };
+     let data = {
+       'idcard':username
+    };
+    return this.http.post<datachkiddoa>(apiUrlchkdoa_idc,data,{headers:header});
+  }
 
 
   login(username:string,type_person): Observable<data> {
@@ -47,7 +64,7 @@ export class LoginserviceProvider {
     };
     return this.http.post<data>(this.apiUrluserlogin,data,{headers:header});
   }
-ioni
+
   getroom(training_type,year,month,type): Observable<data> {
     const header = { 'Content-Type': 'application/json' };
      let data = {

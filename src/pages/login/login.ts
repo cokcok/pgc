@@ -108,7 +108,7 @@ export class LoginPage {
 
 
 
-
+ datadoa:any;  datadoa1 :any; datadoa2 :any ;
   Login(myForm) {
     this.refresh();
     this.name = null;this.type_status_name = null;this.tel = null;
@@ -207,97 +207,139 @@ export class LoginPage {
               (data) => {
                 if (data.results !== null)
                 {
+                  this.datadoa = 1;
                   //console.log(data);
                   this.hideMe = true;
                   this.name = datachkidcard.name;
                   this.type_status_name = 'มีการสมัครจากกรมส่งเสริมการเกษตร';
                   this.hideMe5 = true;
-                  this.login.login(myForm.idcard,myForm.type_person).subscribe(
-                    (data) => {
-                      if (data !== null) {
-                        if (data.status === 0){
-                          this.item_data_land = data.data_detail;
-                          this.tel = data.tel;
-                          this.lname = data.lname;
-                          this.fname = data.fname;
-                          this.hideMe = true; this.hideMe4 = true;
-                          this.total_area_doa = 0;
-                          for (var i = 0; i < this.item_data_land.length; i++) {
-
-                            if (data.data_detail[i]['FLG'] === '0')
-                            {
-                               this.item_data_land_true.push({
-                                LAND_NAME: this.item_data_land[i]['LAND_NAME'],
-                                PLANT_YR: this.item_data_land[i]['PLANT_YR'],
-                                RAI: this.item_data_land[i]['RAI'],
-                                NGAN: this.item_data_land[i]['NGAN'],
-                                WAA: this.item_data_land[i]['WAA'],
-                                LAND_TYPE: this.item_data_land[i]['LAND_TYPE'],
-                                NUM_APP: this.item_data_land[i]['NUM_APP'],
-                                IDCARD: this.item_data_land[i]['IDCARD'],
-                                F_MAIN_ID: this.item_data_land[i]['F_MAIN_ID'],
-                                LAND_PERSON: this.item_data_land[i]['LAND_PERSON']
-                              })
-
-                              this.total_area_doa += Number((data.data_detail[i]['RAI'])) + Number((data.data_detail[i]['NGAN'] * 0.25)) + Number((data.data_detail[i]['WAA'] * 0.0025));
-
-                            }
-                          }
-                          if (this.total_area_doa > 0)
-                          {
-
-                            this.total_area1 = Math.floor(this.total_area_doa);
-                            this.total_area2 = Math.floor(Number((this.total_area_doa % 1) * 100 / 25));
-                            this.total_area3 = Math.floor(Number(((this.total_area_doa * 10000) % 2500) / 25));
-                          }
-                          else
-                          {
-                            //this.type_status = 2;
-                            //this.hideMe5 = false;
-                            this.hideMe1 = false;
-                            this.hideMe2 = false;
-                          }
-                        }
-                        else if( data.status === 1 )
-                        {
-                            this.item_data_land = data.data_detail;
-                            this.navCtrl.push(Login1Page, {
-                             'data1':  this.item_data_land
-                           });
-
-                          }
-                      }
-                      else {
-                        this.hideMe = false;
-                        this.hideMe3 = false;
-                        this.hideMe1 = false;
-                        this.hideMe2 = false;
-                        this.hideMe4 = false;
-                        this.hideMe5 = false;
-                        let alert = this.config.ChkformAlert('ไม่พบข้อมูลขึ้นทะเบียนเกษตรกร กยท. ที่เป็น เจ้าของ ผู้เช่า หรือผู้ทำ');
-                        alert.present();
-                      }
-                    }
-                  );
                 }
                 else
                 {
-                  //console.log('notfound');
-                  this.hideMe = true;
-                  this.hideMe3 = false;
-                  this.hideMe1 = false;
-                  this.hideMe2 = false;
-                  this.hideMe4 = false;
-                  this.type_status_name = 'มีการสมัครจากกรมส่งเสริมการเกษตร'
-                  this.type_status = 2;
-                  this.name = datachkidcard.name;
+                  this.datadoa = 0;
                 }
               }
             );
 
+            this.login.loginchkidcarddoa1(myForm.idcard).subscribe( //เคสทีสมัครกับ กสก.
+              (data) => {
+                if (data.results !== null)
+                {
+                  this.datadoa1 = 1;
+                  //console.log(data);
+                  this.hideMe = true;
+                  this.name = datachkidcard.name;
+                  this.type_status_name = 'มีการสมัครจากกรมส่งเสริมการเกษตร';
+                  this.hideMe5 = true;
+                }
+                else
+                {
+                  this.datadoa1 = 0;
+                }
+              }
+            );
 
+            this.login.loginchkidcarddoa2(myForm.idcard).subscribe( //เคสทีสมัครกับ กสก.
+              (data) => {
+                if (data.results !== null)
+                {
+                  this.datadoa2 = 1;
+                  //console.log(data);
+                  this.hideMe = true;
+                  this.name = datachkidcard.name;
+                  this.type_status_name = 'มีการสมัครจากกรมส่งเสริมการเกษตร';
+                  this.hideMe5 = true;
+                }
+                else
+                {
+                  this.datadoa2 = 0;
+                }
+              }
+            );
+            console.log(this.datadoa,this.datadoa1,this.datadoa2);
+            if( this.datadoa === 0  && this.datadoa1 === 0 && this.datadoa2 === 0)
+            {
+              this.hideMe = true;
+              this.hideMe3 = false;
+              this.hideMe1 = false;
+              this.hideMe2 = false;
+              this.hideMe4 = false;
+              this.type_status_name = 'มีการสมัครจากกรมส่งเสริมการเกษตร'
+              this.type_status = 2;
+              this.name = datachkidcard.name;
+            }
+            else
+            {
+              this.login.login(myForm.idcard,myForm.type_person).subscribe(
+                (data) => {
+                  if (data !== null) {
+                   //console.log(data);
+                    if (data.status === 0){
+                      this.item_data_land = data.data_detail;
+                      this.tel = data.tel;
+                      this.lname = data.lname;
+                      this.fname = data.fname;
+                      this.hideMe = true; this.hideMe4 = true;
+                      this.total_area_doa = 0;
+                      for (var i = 0; i < this.item_data_land.length; i++) {
 
-           // this.hideMe4 = true;
+                        if (data.data_detail[i]['FLG'] === '0')
+                        {
+                           this.item_data_land_true.push({
+                            LAND_NAME: this.item_data_land[i]['LAND_NAME'],
+                            PLANT_YR: this.item_data_land[i]['PLANT_YR'],
+                            RAI: this.item_data_land[i]['RAI'],
+                            NGAN: this.item_data_land[i]['NGAN'],
+                            WAA: this.item_data_land[i]['WAA'],
+                            LAND_TYPE: this.item_data_land[i]['LAND_TYPE'],
+                            NUM_APP: this.item_data_land[i]['NUM_APP'],
+                            IDCARD: this.item_data_land[i]['IDCARD'],
+                            F_MAIN_ID: this.item_data_land[i]['F_MAIN_ID'],
+                            LAND_PERSON: this.item_data_land[i]['LAND_PERSON']
+                          })
+
+                          this.total_area_doa += Number((data.data_detail[i]['RAI'])) + Number((data.data_detail[i]['NGAN'] * 0.25)) + Number((data.data_detail[i]['WAA'] * 0.0025));
+
+                        }
+                      }
+                      if (this.total_area_doa > 0)
+                      {
+
+                        this.total_area1 = Math.floor(this.total_area_doa);
+                        this.total_area2 = Math.floor(Number((this.total_area_doa % 1) * 100 / 25));
+                        this.total_area3 = Math.floor(Number(((this.total_area_doa * 10000) % 2500) / 25));
+                      }
+                      else
+                      {
+                        //this.type_status = 2;
+                        //this.hideMe5 = false;
+                        this.hideMe1 = false;
+                        this.hideMe2 = false;
+                      }
+                    }
+                    else if( data.status === 1 )
+                    {
+                        this.item_data_land = data.data_detail;
+                        this.navCtrl.push(Login1Page, {
+                         'data1':  this.item_data_land
+                       });
+
+                      }
+                  }
+                   else {
+                    this.hideMe = false;
+                    this.hideMe3 = false;
+                    this.hideMe1 = false;
+                    this.hideMe2 = false;
+                    this.hideMe4 = false;
+                    this.hideMe5 = false;
+                    let alert = this.config.ChkformAlert('ไม่พบข้อมูลขึ้นทะเบียนเกษตรกร กยท. ที่เป็น เจ้าของ ผู้เช่า หรือผู้ทำ');
+                    alert.present();
+                  }
+                }
+              );
+            }
+
           }
       },
       (error) => {

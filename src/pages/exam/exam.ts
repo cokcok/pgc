@@ -32,7 +32,7 @@ export class ExamPage {
 
   ionViewDidLoad() {
     let target = "_system";
-    this.iab.create('http://203.154.28.235/doa_exam/farmer/api_login.php',target,'location=yes');
+    this.iab.create('http://203.154.28.235/doa_exam/farmer/api_login.php?link=chem',target,'location=yes');
    // this.iab.create('http://103.208.27.224/doa_exam/farmer/api_login.php',target,'location=yes');
 
 
