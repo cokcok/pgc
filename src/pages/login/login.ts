@@ -128,7 +128,7 @@ export class LoginPage {
             this.login.login(myForm.idcard,myForm.type_person).subscribe( //เคสครั้งแรกปกติ
               (data) => {
                 //this.navCtrl.setRoot(HomepagePage);
-                //console.log(data);
+                console.log(data);
                 if (data !== null) {
                   if (data.status === 0){
                     this.item_data_land = data.data_detail;
